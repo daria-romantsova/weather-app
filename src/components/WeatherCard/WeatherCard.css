@@ -19,7 +19,7 @@
 
 .WeatherInfo-Wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .Temp-Wrapper {
@@ -27,8 +27,9 @@
 }
 
 .InfoIcon-Container {
-  width: 50%;
   border-right: 1px solid #153d77;
+  flex-basis: 50%;
+  flex-wrap: wrap;
   display: flex;
   gap: 20px;
   align-items: center;
@@ -51,14 +52,16 @@
 }
 
 .FullData-Container {
-  width: 50%;
   display: flex;
   justify-content: center;
+  padding: 20px;
+  flex-wrap: wrap;
   flex-direction: column;
 }
 
 .FullData-Row {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .FullData-Item {
@@ -78,4 +81,32 @@
 
 .FullData-Item p:last-child {
   font-weight: 200;
+}
+
+@media screen and (max-width: 800px) {
+  .WeatherInfo-Wrapper{
+    flex-direction: column;
+  }
+  .InfoIcon-Container {
+    margin: 20px 0;
+    margin-left: 20px;
+    border-right: none;
+    border-bottom: 1px solid #153d77;
+  }
+
+  .InfoTemp {
+    font-size: 70px;
+    margin-left: 0;
+  }
+
+  .InfoDescription {
+    margin-left: 0px;
+  }
+  .CityName {
+    font-size: 45px;
+  }
+  .Date {
+    font-size: 25px;
+    font-weight: 300;
+  }
 }

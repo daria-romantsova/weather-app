@@ -3,11 +3,13 @@
   font-family: "Bellota", system-ui;
   padding: 0;
 }
-.App {
-  height: 98vh;
-  padding: 20px;
+body{
   background: linear-gradient(to right, #00b4db, #0083b0);
+}
+.App {
+  padding: 20px;
 }
 .Weather-Container {
   width: 100%;
+  flex-wrap: wrap;
 }
