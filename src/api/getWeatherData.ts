@@ -4,8 +4,9 @@ const REACT_APP_WEATHER_API_TOKEN = "860712f1b915af9a794b207d3b3215de";
 async function getWeatherFromApi() {
   try {
     const url = new URL("https://api.openweathermap.org/data/2.5/weather");
-    url.searchParams.set("q", "moscow");
+    url.searchParams.set("q", "москва");
     url.searchParams.set("units", "metric");
+    url.searchParams.set("lang", "ru");
     url.searchParams.set("appid", REACT_APP_WEATHER_API_TOKEN);
 
     const response = await fetch(url.toString(), {
@@ -13,7 +14,6 @@ async function getWeatherFromApi() {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       return data;
     } else {
       throw new Error("Ошибка получения данных о погоде");

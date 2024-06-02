@@ -1,9 +1,6 @@
 import React from "react";
 import "./App.css";
-import getWeatherFromApi from "./api/getWeatherData";
 import WeatherCard from "./components/WeatherCard/WeatherCard";
-
-getWeatherFromApi();
 
 function App() {
   return (

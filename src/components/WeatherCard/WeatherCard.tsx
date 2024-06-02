@@ -1,64 +1,83 @@
-import react from "react";
+import React, { useState, useEffect } from "react";
 import "./WeatherCard.css";
-
-interface WeatherCardProps {
-  city: string;
-  temp: string;
-  currentDate: Date;
-  descriptionWeather: string; // общий прогноз
-  icon: string;
-  pressure: string;
-  wind: string;
-  feelsLike: string;
-  humidity: string; // влажность
-}
+import getWeatherFromApi from "../../api/getWeatherData";
+import { WeatherModel } from "../../model/Weather";
+import { getTodaysDate } from "../../helpers/helper";
 
 const WeatherCard = () => {
-  const sunny =
-    "https://cdn.icon-icons.com/icons2/2211/PNG/512/weather_sun_sunny_cloud_icon_134157.png";
+  const [weatherData, setWeatherData] = useState<WeatherModel | null>(null);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await getWeatherFromApi();
+        console.log(data);
+        setWeatherData(data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
-    <div className={"Card-Container"}>
-      <div className={"CityName-Wrapper"}>
-        <h3 className={"CityName"}>Москва, РФ</h3>
-        <h6 className={"Date"}>Воскресенье, 2 июня</h6>
-      </div>
-      <div className={"WeatherInfo-Wrapper"}>
-        <div className={"InfoIcon-Container"}>
-          <img src={sunny} alt="sunny" className={"InfoIcon"} />
-          <div className={"InfoTemp-Container"}>
-            <h4 className={"InfoTemp"}>
-              21<span>&#176;</span>
-            </h4>
-            <h5 className={"InfoDescription"}>Солнечно</h5>
+    <div className="Card-Container">
+      {weatherData && (
+        <>
+          <div className="CityName-Wrapper">
+            <h3 className="CityName">{weatherData.name}</h3>
+            <h6 className="Date">{getTodaysDate()}</h6>
           </div>
-        </div>
-        <div className={"FullData-Container"}>
-          <div className={"FullData-Row"}>
-            <div className={"FullData-Item"}>
-              <p>
-                23<span>&#176;</span>
-              </p>
-              <p>Ощущается как</p>
+          <div className="WeatherInfo-Wrapper">
+            <div className="InfoIcon-Container">
+              <div className="InfoTemp-Container">
+                <div className="Temp-Wrapper">
+                  <h4 className="InfoTemp">
+                    {Math.round(Number(weatherData.main.temp))}
+                    <span>&#176;</span>
+                  </h4>
+                  <img
+                    src={`http://openweathermap.org/img/w/${weatherData.weather[0].icon}.png`}
+                    alt={""}
+                    className="InfoIcon"
+                  />
+                </div>
+
+                <h5 className="InfoDescription">
+                  {weatherData.weather[0].description}
+                </h5>
+              </div>
             </div>
-            <div className={"FullData-Item"}>
-              <p>7 м/c</p>
-              <p>Скорость ветра</p>
+            <div className="FullData-Container">
+              <div className="FullData-Row">
+                <div className="FullData-Item">
+                  <p>
+                    {Math.round(Number(weatherData.main.feels_like))}
+                    <span>&#176;</span>
+                  </p>
+                  <p>Ощущается как</p>
+                </div>
+                <div className="FullData-Item">
+                  <p>{weatherData.wind.speed} м/с</p>
+                  <p>Скорость ветра</p>
+                </div>
+              </div>
+              <div className="FullData-Row">
+                <div className="FullData-Item">
+                  <p>{weatherData.main.humidity}%</p>
+                  <p>Влажность</p>
+                </div>
+                <div className="FullData-Item">
+                  <p>{weatherData.main.pressure} мм</p>
+                  <p>Давление</p>
+                </div>
+              </div>
             </div>
           </div>
-          <div className={"FullData-Row"}>
-            <div className={"FullData-Item"}>
-              <p>65%</p>
-              <p>Влажность</p>
-            </div>
-            <div className={"FullData-Item"}>
-              <p>756 па</p>
-              <p>Давление</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </div>
   );
 };
+
 export default WeatherCard;
