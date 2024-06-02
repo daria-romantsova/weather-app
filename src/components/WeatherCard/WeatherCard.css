@@ -56,7 +56,6 @@
   justify-content: center;
   padding: 20px;
   flex-wrap: wrap;
-  flex-direction: column;
 }
 
 .FullData-Row {
