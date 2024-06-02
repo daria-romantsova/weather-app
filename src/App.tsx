@@ -1,10 +1,16 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import getWeatherFromApi from "./api/getWeatherData";
+import WeatherCard from "./components/WeatherCard/WeatherCard";
+
+getWeatherFromApi();
 
 function App() {
   return (
     <div className="App">
-    <h1>Приложение погоды</h1>
+      <div className={"Weather-Container"}>
+        <WeatherCard />
+      </div>
     </div>
   );
 }

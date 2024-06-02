@@ -1,0 +1,72 @@
+.Card-Container {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+}
+
+.CityName-Wrapper {
+}
+
+.CityName {
+  font-size: 65px;
+}
+
+.Date {
+  font-size: 45px;
+}
+
+.WeatherInfo-Wrapper{
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.InfoIcon-Container{
+  width: 50%;
+  border-right: 1px solid #153d77;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.InfoDescription{
+  font-size: 57px;
+}
+
+.InfoTemp {
+  text-align: center;
+  font-size: 90px;
+}
+
+.FullData-Container{
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.FullData-Row{
+  display: flex;
+}
+
+.FullData-Item{
+  font-size: 37px;
+  width: 360px;
+  display: flex;
+  gap: 15px;
+  text-align: center;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.FullData-Item p:first-child{
+  font-size: 57px;
+}
+
+.FullData-Item p:last-child{
+  font-weight: 200;
+}
