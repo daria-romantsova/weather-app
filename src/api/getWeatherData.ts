@@ -4,7 +4,7 @@ const REACT_APP_WEATHER_API_TOKEN = "860712f1b915af9a794b207d3b3215de";
 async function getWeatherFromApi() {
   try {
     const url = new URL("https://api.openweathermap.org/data/2.5/weather");
-    url.searchParams.set("q", "москва");
+    url.searchParams.set("q", "Симферополь");
     url.searchParams.set("units", "metric");
     url.searchParams.set("lang", "ru");
     url.searchParams.set("appid", REACT_APP_WEATHER_API_TOKEN);
@@ -23,4 +23,28 @@ async function getWeatherFromApi() {
     return null;
   }
 }
-export default getWeatherFromApi;
+
+async function getWeekWeatherFromApi() {
+  try {
+    const url = new URL("https://api.openweathermap.org/data/2.5/forecast");
+    url.searchParams.set("q", "Симферополь");
+    url.searchParams.set("units", "metric");
+    url.searchParams.set("lang", "ru");
+    url.searchParams.set("cnt", "5");
+    url.searchParams.set("appid", REACT_APP_WEATHER_API_TOKEN);
+
+    const response = await fetch(url.toString(), {
+      method: "GET",
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      throw new Error("Ошибка получения данных о погоде");
+    }
+  } catch (error) {
+    console.error("Ошибка получения данных о погоде", error);
+    return null;
+  }
+}
+export { getWeatherFromApi, getWeekWeatherFromApi };

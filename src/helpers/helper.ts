@@ -1,3 +1,5 @@
+import moment from "moment/moment";
+
 export function getTodaysDate() {
   const today = new Date();
   const dayOfWeek = [
@@ -26,3 +28,7 @@ export function getTodaysDate() {
   ][today.getMonth()];
   return `${dayOfWeek}, ${dayOfMonth} ${month}`;
 }
+
+export const dayHelper = (timestamp: number, index: number) => {
+  return moment().add(index, "days").format("DD.MM");
+};

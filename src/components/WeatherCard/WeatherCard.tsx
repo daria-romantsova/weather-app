@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./WeatherCard.css";
-import getWeatherFromApi from "../../api/getWeatherData";
+import { getWeatherFromApi } from "../../api/getWeatherData";
 import { WeatherModel } from "../../model/Weather";
 import { getTodaysDate } from "../../helpers/helper";
 
@@ -11,9 +11,9 @@ const WeatherCard = () => {
     async function fetchData() {
       try {
         const data = await getWeatherFromApi();
-        console.log(data);
         setWeatherData(data);
       } catch (error) {
+        console.log("Данные о погоде не пришли :(");
         console.error(error);
       }
     }
@@ -22,6 +22,7 @@ const WeatherCard = () => {
 
   return (
     <div className="Card-Container">
+      {/*проверка что переменная с погодой не пустая */}
       {weatherData && (
         <>
           <div className="CityName-Wrapper">

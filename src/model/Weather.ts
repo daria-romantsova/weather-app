@@ -1,4 +1,5 @@
 export interface WeatherModel {
+  readonly dt: string;
   readonly name: string;
   readonly main: Main;
   readonly currentDate: Date;
@@ -20,4 +21,8 @@ export interface Weather {
 
 export interface Wind {
   readonly speed: string;
+}
+
+export interface WeekWeather {
+  readonly list: WeatherModel[];
 }
